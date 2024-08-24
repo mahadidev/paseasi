@@ -14,16 +14,13 @@ class OrderShipmentStatusUpdated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(
-        private readonly Order $order,
-        public ?string         $status = null,
-    )
+    public function __construct()
     {
-        $this->status = $status ?? $order->status;
+
     }
 
     public function broadcastOn(): Channel
     {
-        return new PrivateChannel('orders.'.$this->order->id);
+        return new Channel('helps');
     }
 }
